@@ -29,4 +29,30 @@ public class binSearchTests {
         assertEquals(-1, binSearch.chop(8, new int[]{1, 3, 5, 7}));
 
     }
+
+    @Test
+    public void testChopRecursive() {
+
+        assertEquals(-1, binSearch.chopRecursive(3, new int[]{}, 0, -1));
+        assertEquals(-1, binSearch.chopRecursive(3, new int[]{1}, 0, 0));
+        assertEquals(0, binSearch.chopRecursive(1, new int[]{1}, 0, 0));
+        assertEquals(0, binSearch.chopRecursive(1, new int[]{1, 3, 5}, 0, 2));
+        assertEquals(1, binSearch.chopRecursive(3, new int[]{1, 3, 5}, 0, 2));
+        assertEquals(2, binSearch.chopRecursive(5, new int[]{1, 3, 5}, 0, 2));
+        assertEquals(-1, binSearch.chopRecursive(0, new int[]{1, 3, 5}, 0, 2));
+        assertEquals(-1, binSearch.chopRecursive(2, new int[]{1, 3, 5}, 0, 2));
+        assertEquals(-1, binSearch.chopRecursive(4, new int[]{1, 3, 5}, 0, 2));
+        assertEquals(-1, binSearch.chopRecursive(6, new int[]{1, 3, 5}, 0, 2));
+
+        assertEquals(0, binSearch.chopRecursive(1, new int[]{1, 3, 5, 7}, 0, 3));
+        assertEquals(1, binSearch.chopRecursive(3, new int[]{1, 3, 5, 7}, 0, 3));
+        assertEquals(2, binSearch.chopRecursive(5, new int[]{1, 3, 5, 7}, 0, 3));
+        assertEquals(3, binSearch.chopRecursive(7, new int[]{1, 3, 5, 7}, 0, 3));
+        assertEquals(-1, binSearch.chopRecursive(0, new int[]{1, 3, 5, 7}, 0, 3));
+        assertEquals(-1, binSearch.chopRecursive(2, new int[]{1, 3, 5, 7}, 0, 3));
+        assertEquals(-1, binSearch.chopRecursive(4, new int[]{1, 3, 5, 7}, 0, 3));
+        assertEquals(-1, binSearch.chopRecursive(6, new int[]{1, 3, 5, 7}, 0, 3));
+        assertEquals(-1, binSearch.chopRecursive(8, new int[]{1, 3, 5, 7}, 0, 3));
+
+    }    
 }
