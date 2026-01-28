@@ -34,6 +34,8 @@ public class AccountTests {
             _account.deposit(500);
             _account.withdraw(10000);
         });
+
+        assertTrue(_account.printStatement().contains("+500\t500"));
     }    
 
     @Test
