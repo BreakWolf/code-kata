@@ -10,44 +10,42 @@ import kata.banking.lib.impl.Account;
 
 public class AccountTests {
 
+    private Account _account = new Account();
+
     @Test
     public void testAccountDeposit() {
-        Account account = new Account();
-
-        account.deposit(500);
-        assertTrue(account.printStatement().contains("+500\t500"));
+        _account.deposit(500);
+        assertTrue(_account.printStatement().contains("+500\t500"));
     }
 
     @Test
     public void testAccountWithdraw() {
-        Account account = new Account();
 
-        account.deposit(1000);
-        account.withdraw(300);
-        assertTrue(account.printStatement().contains("+1000\t1000"));
-        assertTrue(account.printStatement().contains("-300\t700"));
+        _account.deposit(1000);
+        _account.withdraw(300);
+
+        assertTrue(_account.printStatement().contains("+1000\t1000"));
+        assertTrue(_account.printStatement().contains("-300\t700"));
     }
 
     @Test
     public void testAccountWithdrawMoreThenBalance() {
-        Account account = new Account();
         assertThrows(IllegalStateException.class, () ->{
-            account.deposit(500);
-            account.withdraw(10000);
+            _account.deposit(500);
+            _account.withdraw(10000);
         });
     }    
 
     @Test
     public void testAccountDeposit3Times() {
-        // Test code for deposit method
-        Account account = new Account();
 
-        account.deposit(500);
-        account.deposit(1500);
-        account.deposit(5000);
-        assertTrue(account.printStatement().contains("+500\t500"));
-        assertTrue(account.printStatement().contains("+1500\t2000"));
-        assertTrue(account.printStatement().contains("+5000\t7000"));
+        _account.deposit(500);
+        _account.deposit(1500);
+        _account.deposit(5000);
+
+        assertTrue(_account.printStatement().contains("+500\t500"));
+        assertTrue(_account.printStatement().contains("+1500\t2000"));
+        assertTrue(_account.printStatement().contains("+5000\t7000"));
     }
 
 }
