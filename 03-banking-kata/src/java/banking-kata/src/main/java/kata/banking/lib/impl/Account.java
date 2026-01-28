@@ -22,6 +22,9 @@ public class Account implements IAccount {
 
     @Override
     public void withdraw(int amount) {
+        if(balance < amount) {
+            throw new IllegalStateException("Insufficient funds");
+        }
         balance -= amount;
         transitions.add(new Transition(getCurrentDate(), amount * -1, balance));
     }

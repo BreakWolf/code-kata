@@ -1,6 +1,7 @@
 package kata.banking.lib;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -26,6 +27,15 @@ public class AccountTests {
         assertTrue(account.printStatement().contains("+1000\t1000"));
         assertTrue(account.printStatement().contains("-300\t700"));
     }
+
+    @Test
+    public void testAccountWithdrawMoreThenBalance() {
+        Account account = new Account();
+        assertThrows(IllegalStateException.class, () ->{
+            account.deposit(500);
+            account.withdraw(10000);
+        });
+    }    
 
     @Test
     public void testAccountDeposit3Times() {
