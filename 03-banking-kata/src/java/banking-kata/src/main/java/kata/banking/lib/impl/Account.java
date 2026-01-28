@@ -15,7 +15,7 @@ public class Account implements IAccount {
     @Override
     public void deposit(int amount) {
         balance += amount;
-        String currentDate = LocalDate.now().format(DATE_FORMATTER);
+        String currentDate = getCurrentDate();
 
         transitions.add(new Transition(currentDate, amount, balance));
     }
@@ -35,6 +35,11 @@ public class Account implements IAccount {
             statement.append("\n");
         }
         return statement.toString();
+    }
+
+    private String getCurrentDate() {
+        String currentDate = LocalDate.now().format(DATE_FORMATTER);
+        return currentDate;
     }
 
 }
