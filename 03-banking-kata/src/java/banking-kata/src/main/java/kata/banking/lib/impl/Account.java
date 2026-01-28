@@ -1,5 +1,7 @@
 package kata.banking.lib.impl;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,11 +10,14 @@ import kata.banking.lib.IAccount;
 public class Account implements IAccount {
     private int balance = 0;
     private List<Transition> transitions = new ArrayList<>();
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
     @Override
     public void deposit(int amount) {
         balance += amount;
-        transitions.add(new Transition("28.01.2026", amount, balance));
+        String currentDate = LocalDate.now().format(DATE_FORMATTER);
+
+        transitions.add(new Transition(currentDate, amount, balance));
     }
 
     @Override
