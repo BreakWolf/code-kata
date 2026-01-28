@@ -39,6 +39,17 @@ public class AccountTests {
     }    
 
     @Test
+    public void testActionShouldBePositive() {
+        assertThrows(IllegalArgumentException.class, () ->{
+            _account.deposit(-500);
+        });
+
+        assertThrows(IllegalArgumentException.class, () ->{
+            _account.withdraw(-300);
+        });
+    }
+
+    @Test
     public void testAccountDeposit3Times() {
 
         _account.deposit(500);

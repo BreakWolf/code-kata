@@ -14,6 +14,10 @@ public class Account implements IAccount {
 
     @Override
     public void deposit(int amount) {
+        if(amount <= 0) {
+            throw new IllegalArgumentException("Deposit amount must be positive");
+        }
+
         balance += amount;
         String currentDate = getCurrentDate();
 
@@ -22,6 +26,9 @@ public class Account implements IAccount {
 
     @Override
     public void withdraw(int amount) {
+        if(amount <= 0) {
+            throw new IllegalArgumentException("Withdraw amount must be positive");
+        }
         if(balance < amount) {
             throw new IllegalStateException("Insufficient funds");
         }
