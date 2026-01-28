@@ -23,6 +23,7 @@ public class Account implements IAccount {
     @Override
     public void withdraw(int amount) {
         balance -= amount;
+        transitions.add(new Transition(getCurrentDate(), amount * -1, balance));
     }
 
     @Override

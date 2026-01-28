@@ -11,11 +11,20 @@ public class AccountTests {
 
     @Test
     public void testAccountDeposit() {
-        // Test code for deposit method
         Account account = new Account();
 
         account.deposit(500);
         assertTrue(account.printStatement().contains("+500\t500"));
+    }
+
+    @Test
+    public void testAccountWithdraw() {
+        Account account = new Account();
+
+        account.deposit(1000);
+        account.withdraw(300);
+        assertTrue(account.printStatement().contains("+1000\t1000"));
+        assertTrue(account.printStatement().contains("-300\t700"));
     }
 
     @Test
