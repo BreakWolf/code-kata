@@ -30,6 +30,10 @@ public class LogEntry implements Comparable<LogEntry> {
         return logLevel;
     }
 
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
     @Override
     public int compareTo(LogEntry o) {
         return this.logLevel.compareTo(o.logLevel);

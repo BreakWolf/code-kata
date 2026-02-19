@@ -1,10 +1,10 @@
 package com.code.kata;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import com.code.kata.entities.LogEntry;
@@ -26,8 +26,18 @@ public class LogAggregator {
             .entrySet().stream()
             .sorted(Map.Entry.comparingByKey())
             .forEach(entry -> {
-                result.append(entry.getKey() 
-                    + ": " + entry.getValue().size()
+                List<LogEntry> sortedEntries = entry.getValue()
+                    .stream()
+                    .sorted((a, b) -> a.getTimestamp()
+                        .compareTo(b.getTimestamp()))
+                    .collect(Collectors.toList());
+                LogEntry firsEntry = sortedEntries.get(0);
+                LogEntry lastEntry = sortedEntries.get(sortedEntries.size() - 1);
+
+                result.append(entry.getKey() + "\t" 
+                    + "count=" + entry.getValue().size()
+                    + " first=" + firsEntry.getTimestamp().format(DateTimeFormatter.ofPattern("HH:mm:ss"))
+                    + " last=" + lastEntry.getTimestamp().format(DateTimeFormatter.ofPattern("HH:mm:ss"))
                     + System.lineSeparator());
             });
         return result.toString();
