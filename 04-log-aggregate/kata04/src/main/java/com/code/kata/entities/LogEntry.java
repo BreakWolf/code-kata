@@ -6,13 +6,13 @@ import java.util.Arrays;
 
 public class LogEntry implements Comparable<LogEntry> {
     private LocalDateTime timestamp;
-    private String logLevel;
+    private LogLevel logLevel;
     private String message;
 
     public LogEntry(String timestamp, String logLevel, String message) {
         this.timestamp = LocalDateTime.parse(timestamp
             , DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        this.logLevel = logLevel;
+        this.logLevel = LogLevel.valueOf(logLevel);
         this.message = message;
     } 
 
@@ -20,13 +20,13 @@ public class LogEntry implements Comparable<LogEntry> {
         String[] parts = logstString.split(" ");
         this.timestamp = LocalDateTime.parse(parts[0] + " " + parts[1]
             , DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        this.logLevel = parts[2];
+        this.logLevel = LogLevel.valueOf(parts[2]);
         this.message = String.join(" ", 
                 Arrays.copyOfRange(parts, 3, parts.length)
         );
     }
 
-    public String getLogLevel() {
+    public LogLevel getLogLevel() {
         return logLevel;
     }
 

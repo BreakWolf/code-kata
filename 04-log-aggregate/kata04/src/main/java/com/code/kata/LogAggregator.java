@@ -1,6 +1,5 @@
 package com.code.kata;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
@@ -8,6 +7,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.code.kata.entities.LogEntry;
+import com.code.kata.entities.LogLevel;
 
 public class LogAggregator {
     private List<LogEntry> logEntries;
@@ -24,7 +24,7 @@ public class LogAggregator {
         logEntries.stream()
             .collect(Collectors.groupingBy(LogEntry::getLogLevel))
             .entrySet().stream()
-            .sorted(Map.Entry.comparingByKey())
+            .sorted(Map.Entry.<LogLevel, List<LogEntry>>comparingByKey().reversed())
             .forEach(entry -> {
                 List<LogEntry> sortedEntries = entry.getValue()
                     .stream()
