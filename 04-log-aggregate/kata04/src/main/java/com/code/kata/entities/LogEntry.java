@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
-public class LogEntry {
+public class LogEntry implements Comparable<LogEntry> {
     private LocalDateTime timestamp;
     private String logLevel;
     private String message;
@@ -26,7 +26,12 @@ public class LogEntry {
         );
     }
 
-    public Object getLogLevel() {
+    public String getLogLevel() {
         return logLevel;
+    }
+
+    @Override
+    public int compareTo(LogEntry o) {
+        return this.logLevel.compareTo(o.logLevel);
     }
 }

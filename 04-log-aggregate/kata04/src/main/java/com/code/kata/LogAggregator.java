@@ -1,7 +1,9 @@
 package com.code.kata;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -21,8 +23,12 @@ public class LogAggregator {
         StringBuilder result = new StringBuilder();
         logEntries.stream()
             .collect(Collectors.groupingBy(LogEntry::getLogLevel))
-            .forEach((logLevel, entries) -> {
-                result.append(logLevel + ": " + entries.size() + System.lineSeparator());
+            .entrySet().stream()
+            .sorted(Map.Entry.comparingByKey())
+            .forEach(entry -> {
+                result.append(entry.getKey() 
+                    + ": " + entry.getValue().size()
+                    + System.lineSeparator());
             });
         return result.toString();
     }
