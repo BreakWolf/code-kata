@@ -12,6 +12,12 @@ import com.code.kata.entities.LogLevel;
 public class LogAggregator {
     private List<LogEntry> logEntries;
 
+    public LogAggregator(List<String> logStrings) {
+        this.logEntries = logStrings.stream()
+                .map(LogEntry::new)
+                .collect(Collectors.toList());
+    }
+
     public LogAggregator(String logString) {
         String[] logStrings = logString.split(System.lineSeparator());
         logEntries = Arrays.stream(logStrings)
