@@ -1,6 +1,8 @@
-package com.code.kata;
+package com.code.kata.impl;
 
 import java.util.List;
+
+import com.code.kata.LogSource;
 
 public class LogSourceImpl implements LogSource {
 
