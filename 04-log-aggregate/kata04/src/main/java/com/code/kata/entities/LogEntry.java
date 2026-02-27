@@ -26,6 +26,7 @@ public class LogEntry implements Comparable<LogEntry> {
         );
     }
 
+
     public LogLevel getLogLevel() {
         return logLevel;
     }

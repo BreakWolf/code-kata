@@ -19,4 +19,10 @@ public class LogAggregatorTests {
             "INFO"+ "\t"+"count=1 first=10:15:32 last=10:15:32" + System.lineSeparator() 
         );
     }
+
+    @Test
+    public void print_when_log_is_empty(){
+        LogAggregator logAggregator = new LogAggregator();
+        assert logAggregator.printResult().equals("");
+    }
 }

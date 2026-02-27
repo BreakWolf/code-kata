@@ -1,5 +1,6 @@
 package com.code.kata;
 
+import java.time.Duration;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
@@ -13,9 +14,7 @@ public class LogAggregator {
     private List<LogEntry> logEntries;
 
     public LogAggregator(List<String> logStrings) {
-        this.logEntries = logStrings.stream()
-                .map(LogEntry::new)
-                .collect(Collectors.toList());
+        parseLogStringToEntry(logStrings);
     }
 
     public LogAggregator(String logString) {
@@ -25,7 +24,30 @@ public class LogAggregator {
                 .collect(Collectors.toList());
     }
 
+    public LogAggregator() {    }
+
+
+    public String aggregate(List<String> logStrings, Duration timeWindow) {
+        // Implementation for aggregation logic based on time window
+        parseLogStringToEntry(logStrings);
+        List<LogEntry> filteredEntries = logEntries.stream()
+                .filter(entry -> Duration.between(entry.getTimestamp(), logEntries.get(0).getTimestamp()).compareTo(timeWindow) <= 0)
+                .collect(Collectors.toList());
+        return "";
+    }
+
+    void parseLogStringToEntry(List<String> logStrings){
+        this.logEntries = logStrings.stream()
+                .map(LogEntry::new)
+                .collect(Collectors.toList());
+    }
+
     public String printResult(){
+        if(logEntries == null 
+            || logEntries.isEmpty()){
+             return "";
+        }
+
         StringBuilder result = new StringBuilder();
         logEntries.stream()
             .collect(Collectors.groupingBy(LogEntry::getLogLevel))
