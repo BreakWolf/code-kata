@@ -1,5 +1,7 @@
 package idv.coding.kata;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -28,8 +30,8 @@ public class LogAggregatorTests {
         logAggregator.addLogEntries(logEntries);
 
         Map<LogLevel, Long> result = logAggregator.aggregateByLogLevel();
-        assert result.get(LogLevel.INFO) == 4;
-        assert result.get(LogLevel.ERROR) == 3;            
-        assert result.get(LogLevel.WARN) == 2;
+        assertEquals(Long.valueOf(4), result.get(LogLevel.INFO));
+        assertEquals(Long.valueOf(3), result.get(LogLevel.ERROR));            
+        assertEquals(Long.valueOf(2), result.get(LogLevel.WARN));
     }
 }
